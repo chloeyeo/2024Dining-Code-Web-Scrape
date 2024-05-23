@@ -18,3 +18,8 @@ driver.get("https://www.diningcode.com/")
 searchInput = driver.find_element(By.CLASS_NAME, "Search__Input")
 searchInput.click()
 searchInput.send_keys("분식집", Keys.ENTER)
+
+# copy paste xpath
+# //*[@id="root"]/div/main/div[2]/div[3]/ol/li[1]/a/div[1]/div/div[1]/h1
+item_info = driver.find_element(By.XPATH, '//*[@id="root"]/div/main/div[2]/div[3]/ol/li[1]/a/div[1]/div/div[1]/h1')
+item_info.click()
