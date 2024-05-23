@@ -30,18 +30,21 @@ item_info.click()
 
 data = []
 
-wait = WebDriverWait(driver, 10)
+# wait = WebDriverWait(driver, 10)
 
 
-try: 
-    close_ad = wait.until(EC.visibility_of_element_located((By.ID, "dismiss-button")))
-    close_ad.click()
+# try: 
+    # close_ad = wait.until(EC.visibility_of_element_located((By.ID, "dismiss-button")))
+    # close_ad.click()
 
-    location = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "locat")))
-    print("location:", location)
+    # location = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "locat")))
+location = driver.find_element(By.CSS_SELECTOR, "#contents .locat")
+    # By.CLASS_NAME
+    # location = driver.find_element(By.XPATH, '//*[@id="div_profile"]/div[2]/ul/li[1]')
+print("location:", location)
 
-except TimeoutException:
-    print("close_ad and location buttons not found within the timeout.")
+# except TimeoutException:
+#     print("close_ad and location buttons not found within the timeout.")
 
 # df = pd.DataFrame(data, columns=[])
 
