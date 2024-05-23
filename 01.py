@@ -54,3 +54,14 @@ driver = webdriver.Chrome(service=service)
 # makes the browser controlled by the 'driver' instance (i.e. Chrome browser)
 # to navigate to the specified URL
 driver.get("https://www.diningcode.com/")
+
+"""How webdriver_manager, Service and webdriver work together:
+1. webdriver_manager downloads the correct version of ChromeDriver and
+provides the path to the downloaded ChromeDriver.
+2. Service manages the ChromeDriver executable. Service takes the path
+from webdriver_manager and handles starting and stopping ChromeDriver.
+The Service class must be provided with the executable_path to the
+browser driver such as the ChromeDriver.
+3. webdriver uses the Service to interact with ChromeDriver. webdriver
+provides methods to automate browser actions.
+"""
