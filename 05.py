@@ -10,6 +10,7 @@ from selenium.common.exceptions import TimeoutException
 from webdriver_manager.chrome import ChromeDriverManager
 
 options = Options()
+# options.add_argument('--headless')
 options.add_experimental_option("excludeSwitches", ["enable-logging"])
 options.add_experimental_option("detach", True) # stop webdriver turning off
 options.add_argument("--start-maximized") # max browser screen size
@@ -41,24 +42,39 @@ submitBtn.click()
 # (서울 전체지역 안에 있는 406개의) 음식점들
 restaurants = driver.find_elements(By.CLASS_NAME, "Slide__Card__Item")
 restarurantATag = restaurants[0].find_elements(By.CSS_SELECTOR, "a")[0]
-print("restaurantATag:", restarurantATag)
+# print("restaurantATag:", restarurantATag)
 restarurantATag.click()
 
 # Switch to the newly opened tab
 driver.switch_to.window(driver.window_handles[-1])
 
+name = driver.find_element(By.XPATH, '//*[@id="div_profile"]/div[1]/div[2]/h1').text
 location = driver.find_element(By.CLASS_NAME, "locat").text.split("\n")[0].split(" ")
 metropolitan = location[0]
 city = location[1]
 district = location[2]
 detailedAddress = location[3]
+rating = driver.find_element(By.ID, 'lbl_review_point').text
+print("name:", name)
 print("metropolitan:", metropolitan)
 print("city:", city)
 print("district:", district)
 print("detailedAddress:", detailedAddress)
+print("rating:", rating)
+data.append([name, metropolitan, city, district, detailedAddress, rating])
 
 
-# df = pd.DataFrame(data, columns=[])
+df = pd.DataFrame(data, columns=["name", "metropolitan", "city", "district", "detailedAddress", "rating"])
 
 # index=False otherwise first column will be named index
 # df.to_csv("diningcode.csv", index=False)
+
+# Convert DataFrame to JSON
+# json_data = df.to_json(orient="records")
+
+# # Save JSON data to a file
+# with open("data.json", "w", encoding='utf-8') as json_file:
+#     json_file.write(json_data)
+
+with open('data.json', 'w', encoding='utf-8') as file:
+    df.to_json(file, force_ascii=False)

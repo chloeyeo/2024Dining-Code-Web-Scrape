@@ -10,6 +10,7 @@ from selenium.common.exceptions import TimeoutException
 from webdriver_manager.chrome import ChromeDriverManager
 
 options = Options()
+# options.add_argument('--headless')
 options.add_experimental_option("excludeSwitches", ["enable-logging"])
 options.add_experimental_option("detach", True) # stop webdriver turning off
 options.add_argument("--start-maximized") # max browser screen size
@@ -40,25 +41,36 @@ submitBtn.click()
 
 # (서울 전체지역 안에 있는 406개의) 음식점들
 restaurants = driver.find_elements(By.CLASS_NAME, "Slide__Card__Item")
-restarurantATag = restaurants[0].find_elements(By.CSS_SELECTOR, "a")[0]
-print("restaurantATag:", restarurantATag)
-restarurantATag.click()
+restaurantPTag = restaurants[0].find_element(By.CSS_SELECTOR, "p")
+print(restaurantPTag.text)
 
-# Switch to the newly opened tab
-driver.switch_to.window(driver.window_handles[-1])
+# for restaurant in restaurants:
+#     # restarurantATag = restaurant.find_elements(By.CSS_SELECTOR, "a")[0]
+#     restaurantPTag = restaurant.find_element(By.CSS_SELECTOR, "p")
+#     print(restaurantPTag.text)
 
-location = driver.find_element(By.CLASS_NAME, "locat").text.split("\n")[0].split(" ")
-metropolitan = location[0]
-city = location[1]
-district = location[2]
-detailedAddress = location[3]
-print("metropolitan:", metropolitan)
-print("city:", city)
-print("district:", district)
-print("detailedAddress:", detailedAddress)
+    # Wait until the element is clickable
+    # wait = WebDriverWait(driver, 10)
+    # restarurantATag = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, f".{restaurant.get_attribute('class')}>a")))
+    # restarurantATag.click()
+
+    # Switch to the newly opened tab
+    # driver.switch_to.window(driver.window_handles[-1])
+
+#     # location = driver.find_element(By.CLASS_NAME, "locat")
+#     location = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "locat")))
+#     locationArr = location.text.split("\n")[0].split(" ")
+#     metropolitan = locationArr[0]
+#     city = locationArr[1]
+#     district = locationArr[2]
+#     detailedAddress = locationArr[3]
+#     data.append([metropolitan, city, district, detailedAddress])
+
+#     # Switch to the first tab
+#     driver.switch_to.window(driver.window_handles[0])
 
 
-# df = pd.DataFrame(data, columns=[])
+# df = pd.DataFrame(data, columns=[metropolitan, city, district, detailedAddress])
 
-# index=False otherwise first column will be named index
+# # index=False otherwise first column will be named index
 # df.to_csv("diningcode.csv", index=False)
