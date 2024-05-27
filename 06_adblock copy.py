@@ -74,7 +74,7 @@ submitBtn.click()
 
 action = driver.find_element(By.CSS_SELECTOR, "body")
 
-for i in range(20):
+for i in range(25):
     # delete 키 오른쪽 바로 옆에 있는 end키를 여러번 눌러서 페이지 끝까지 내린다.
     action.send_keys(
         Keys.END
@@ -85,13 +85,29 @@ time.sleep(rand)
 driver.implicitly_wait(rand)
 
 # 서울 전체지역 안에 있는 음식점들
-restaurants = wait.until(
-    EC.presence_of_all_elements_located((By.CLASS_NAME, "Slide__Card__Item"))
-)
+restaurants = driver.find_elements(By.CLASS_NAME, "Slide__Card__Item")
+# while True:
+#     # Scroll to the bottom of the page
+#     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+#     time.sleep(2)  # Adjust this delay as needed
+
+#     # Retrieve all elements with class name 'Slide__Card__Item' currently in the DOM
+#     restaurants = driver.find_elements(By.CLASS_NAME, "Slide__Card__Item")
+
+#     # Check if all restaurants are loaded
+#     if len(restaurants) >= 3000:
+#         break
+
+# restaurants = wait.until(
+#     EC.presence_of_all_elements_located((By.CLASS_NAME, "Slide__Card__Item"))
+# )
 
 # print("Type of restaurants:", type(restaurants))
 print("Number of restaurants found:", len(restaurants))
-print("restaurants:", restaurants)
+# print("restaurants:", restaurants)
+
+restaurants = set(restaurants)
+print("Number of distinct restaurants found:", len(restaurants))
 
 for restaurant in restaurants:
     time.sleep(rand)
@@ -146,7 +162,3 @@ main = driver.window_handles
 for i in main:
     driver.switch_to.window(i)
     driver.close()
-
-print("data:", data)
-df = pd.DataFrame(data, columns=[metropolitan, city, district, detailedAddress])
-df.to_csv("diningcode.csv", index=False)
