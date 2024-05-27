@@ -139,7 +139,7 @@ for restaurant in restaurants:
     # print("detailedAddress:", detailedAddress)
     data.append([name, metropolitan, city, district, detailedAddress])
 
-    # Switch to the first tab
+    # Switch to the second tab
     driver.switch_to.window(driver.window_handles[1])
 
     # time.sleep(rand)
