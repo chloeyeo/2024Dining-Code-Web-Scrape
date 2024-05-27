@@ -126,8 +126,8 @@ menuList = wait.until(
 menuList_li_tags = menuList.find_elements(By.TAG_NAME, "li")
 menuAndPrice = []
 
-print("name:", name)
-print("rating:", rating)
+# print("name:", name)
+# print("rating:", rating)
 my_restaurant["name"] = name
 my_restaurant["address"] = {
     "metropolitan": metropolitan,
@@ -147,7 +147,7 @@ for li in menuList_li_tags:
     WebDriverWait(driver, 10).until(EC.visibility_of(price_element))
 
     price = price_element.text
-    print("menu:", menu_name, "price:", price)
+    # print("menu:", menu_name, "price:", price)
     menu_item = {"menu": menu_name, "price": price}
     my_restaurant["menuAndPrice"].append(menu_item)
 
@@ -174,4 +174,4 @@ for i in main:
 df = pd.DataFrame(data)
 
 with open("single_restaurant.json", "w", encoding="utf-8") as file:
-    df.to_json(file, force_ascii=False)
+    df.to_json(file, orient="split", force_ascii=False, index=False)
