@@ -140,7 +140,7 @@ my_restaurant["menuAndPrice"] = []
 
 for li in menuList_li_tags:
     menu_name = li.find_element(By.CSS_SELECTOR, "span.Restaurant_Menu").text
-    price_element = li.find_element(By.CSS_SELECTOR, "span.r-txt.Restaurant_MenuPrice")
+    price_element = li.find_element(By.CLASS_NAME, "Restaurant_MenuPrice")
     driver.execute_script("arguments[0].scrollIntoView(true);", price_element)
 
     # Wait for the price element to be visible
