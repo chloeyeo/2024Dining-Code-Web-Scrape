@@ -178,11 +178,6 @@ try:
                     driver.execute_script(
                         "arguments[0].scrollIntoView(true);", price_element
                     )
-
-                    # print("just before checking visibility of price element")
-                    # Wait for the price element to be visible
-                    # WebDriverWait(driver, 10).until(EC.visibility_of(price_element))
-
                     price = price_element.text
                     print("menu:", menu_name, "price:", price)
                     menu_item = {"menu": menu_name, "price": price}

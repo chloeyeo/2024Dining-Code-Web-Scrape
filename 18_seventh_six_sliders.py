@@ -147,12 +147,6 @@ try:
                 EC.element_to_be_clickable((By.ID, "lbl_review_point"))
             ).text
             print("rating:", rating)
-            menuList = wait.until(
-                EC.presence_of_all_elements_located(
-                    (By.CSS_SELECTOR, "ul.list.Restaurant_MenuList")
-                )
-            )[0]
-            menuList_li_tags = menuList.find_elements(By.TAG_NAME, "li")
 
             my_restaurant["name"] = name
             # print("restaurant name:", name)
@@ -164,25 +158,31 @@ try:
             }
             my_restaurant["rating"] = rating
             my_restaurant["menuAndPrice"] = []
+            try:
+                menuList = wait.until(
+                    EC.presence_of_all_elements_located(
+                        (By.CSS_SELECTOR, "ul.list.Restaurant_MenuList")
+                    )
+                )[0]
+                menuList_li_tags = menuList.find_elements(By.TAG_NAME, "li")
 
-            for li in menuList_li_tags:
-                menu_name = li.find_element(
-                    By.CSS_SELECTOR, "span.Restaurant_Menu"
-                ).text
-                price_element = li.find_element(By.CLASS_NAME, "Restaurant_MenuPrice")
-                print("just before driver execute_script")
-                driver.execute_script(
-                    "arguments[0].scrollIntoView(true);", price_element
-                )
-
-                # print("just before checking visibility of price element")
-                # Wait for the price element to be visible
-                # WebDriverWait(driver, 10).until(EC.visibility_of(price_element))
-
-                price = price_element.text
-                print("menu:", menu_name, "price:", price)
-                menu_item = {"menu": menu_name, "price": price}
-                my_restaurant["menuAndPrice"].append(menu_item)
+                for li in menuList_li_tags:
+                    menu_name = li.find_element(
+                        By.CSS_SELECTOR, "span.Restaurant_Menu"
+                    ).text
+                    price_element = li.find_element(
+                        By.CLASS_NAME, "Restaurant_MenuPrice"
+                    )
+                    print("just before driver execute_script")
+                    driver.execute_script(
+                        "arguments[0].scrollIntoView(true);", price_element
+                    )
+                    price = price_element.text
+                    print("menu:", menu_name, "price:", price)
+                    menu_item = {"menu": menu_name, "price": price}
+                    my_restaurant["menuAndPrice"].append(menu_item)
+            except:
+                print("menu not found")
 
             my_restaurant["image"] = []
 
