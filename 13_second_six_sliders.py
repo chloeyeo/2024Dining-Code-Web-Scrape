@@ -100,7 +100,7 @@ read_more_elements = wait.until(
 num_restaurants = 0
 
 try:
-    for read_more in read_more_elements:
+    for read_more in read_more_elements[6:12]:
         print("before execute_script read_more")
         driver.execute_script("arguments[0].scrollIntoView();", read_more)
         # Click the element using JavaScript
@@ -255,5 +255,5 @@ print("Closed first tab")
 
 df = pd.DataFrame(data)
 
-with open("all_restaurants.json", "w", encoding="utf-8") as file:
+with open("second_six_sliders.json", "w", encoding="utf-8") as file:
     df.to_json(file, orient="split", force_ascii=False, index=False)
