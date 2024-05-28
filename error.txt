@@ -1,0 +1,126 @@
+Most recent error when running 11 py:
+Opened and switched to restaurant tab
+name: 어울림
+location: ['서울특별시', '광진구', '광장동', '393-21']
+rating: 4.5
+just before driver execute_script
+menu: 새조개 샤브샤브 price: 45,000원
+just before driver execute_script
+menu: 하모 샤브샤브 price: 45,000원
+just before driver execute_script
+menu: 매생이굴국밥 price: 10,000원
+just before driver execute_script
+menu: 메밀막국수 price: 9,000원
+just before driver execute_script
+menu: 메밀비빔국수 price: 9,000원
+just before driver execute_script
+menu: 매생이굴칼국수 price: 9,000원
+just before driver execute_script
+menu: 해물된장찌개 price: 9,000원
+just before driver execute_script
+menu: 부추전 price: 10,000원
+just before driver execute_script
+menu: 고등어구이 price: 13,000원
+img src value: https://d12zq4w4guyljn.cloudfront.net/750_750_20240409054431_photo1_d672d250f50c.jpg
+img src value: https://d12zq4w4guyljn.cloudfront.net/750_750_20240409054431_photo2_d672d250f50c.jpg
+Closed the current restaurant tab
+Switched back to second tab
+Opened and switched to restaurant tab
+name: 문래옥
+location: ['서울시', '영등포구', '문래동6가', '29-1']
+rating: 5
+just before driver execute_script
+menu: 차돌박이 price: 17,000원
+just before driver execute_script
+menu: 된장찌개 price: 7,000원
+just before driver execute_script
+menu: 공기밥 price: 1,000원
+just before driver execute_script
+menu: 모듬구이 price: 75,000원
+just before driver execute_script
+menu: 꽃등심 price: 39,000원
+just before driver execute_script
+menu: 치마살 price: 45,000원
+just before driver execute_script
+menu: 토시살 price: 45,000원
+just before driver execute_script
+menu: 새우살 price: 45,000원
+just before driver execute_script
+menu: 살치살 price: 45,000원
+just before driver execute_script
+menu: 안창살 price: 49,000원
+img src value: https://d12zq4w4guyljn.cloudfront.net/750_750_20220412110822_photo1_004f6e0229f8.jpg
+img src value: https://d12zq4w4guyljn.cloudfront.net/750_750_20220412110822_photo2_004f6e0229f8.jpg
+Closed the current restaurant tab
+Switched back to second tab
+Closed second tab
+Switched back to first tab
+before execute_script read_more
+Open and switch to second tab
+Opened and switched to restaurant tab
+error occurred: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=125.0.6422.112)
+Stacktrace:
+        GetHandleVerifier [0x005DB793+45827]
+        (No symbol) [0x0056DB74]
+        (No symbol) [0x0046150F]
+        (No symbol) [0x0043E133]
+        (No symbol) [0x004C949F]
+        (No symbol) [0x004DB8E6]
+        (No symbol) [0x004C2B96]
+        (No symbol) [0x00496998]
+        (No symbol) [0x0049751D]
+        GetHandleVerifier [0x008943C3+2899763]
+        GetHandleVerifier [0x008E77ED+3240797]
+        GetHandleVerifier [0x00661264+593364]
+        GetHandleVerifier [0x0066818C+621820]
+        (No symbol) [0x00576F54]
+        (No symbol) [0x00573658]
+        (No symbol) [0x005737F7]
+        (No symbol) [0x005658AE]
+        BaseThreadInitThunk [0x766AFCC9+25]
+        RtlGetAppContainerNamedObjectPath [0x770B7CBE+286]
+        RtlGetAppContainerNamedObjectPath [0x770B7C8E+238]
+
+number of restaurants printed out so far: 291
+Traceback (most recent call last):
+  File "c:\Users\EZEN\Dining-Code-Web-Scrape\11_get_all_fields_all_restaurants.py", line 259, in <module>
+    driver.close()  # close current tab which is first tab
+    ^^^^^^^^^^^^^^
+  File "C:\Users\EZEN\anaconda3\envs\diningcode\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 458, in close
+    self.execute(Command.CLOSE)
+  File "C:\Users\EZEN\anaconda3\envs\diningcode\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\EZEN\anaconda3\envs\diningcode\Lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: Unable to receive message from renderer
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=125.0.6422.112)
+Stacktrace:
+        GetHandleVerifier [0x005DB793+45827]
+        (No symbol) [0x0056DB74]
+        (No symbol) [0x0046150F]
+        (No symbol) [0x0044D496]
+        (No symbol) [0x0044B739]
+        (No symbol) [0x0044BD1D]
+        (No symbol) [0x00461A22]
+        (No symbol) [0x0043DD1D]
+        (No symbol) [0x004CEC5B]
+        (No symbol) [0x004C2DC3]
+        (No symbol) [0x00496998]
+        (No symbol) [0x0049751D]
+        GetHandleVerifier [0x008943C3+2899763]
+        GetHandleVerifier [0x008E77ED+3240797]
+        GetHandleVerifier [0x00661264+593364]
+        GetHandleVerifier [0x0066818C+621820]
+        (No symbol) [0x00576F54]
+        (No symbol) [0x00573658]
+        (No symbol) [0x005737F7]
+        (No symbol) [0x005658AE]
+        BaseThreadInitThunk [0x766AFCC9+25]
+        RtlGetAppContainerNamedObjectPath [0x770B7CBE+286]
+        RtlGetAppContainerNamedObjectPath [0x770B7C8E+238]
+
+
+(diningcode) C:\Users\EZEN\Dining-Code-Web-Scrape>
