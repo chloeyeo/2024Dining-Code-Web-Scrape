@@ -100,7 +100,7 @@ read_more_elements = wait.until(
 num_restaurants = 0
 
 try:
-    for read_more in read_more_elements[18:24]:
+    for read_more in read_more_elements[24:30]:
         print("before execute_script read_more")
         driver.execute_script("arguments[0].scrollIntoView();", read_more)
         # Click the element using JavaScript
@@ -147,6 +147,12 @@ try:
                 EC.element_to_be_clickable((By.ID, "lbl_review_point"))
             ).text
             print("rating:", rating)
+            menuList = wait.until(
+                EC.presence_of_all_elements_located(
+                    (By.CSS_SELECTOR, "ul.list.Restaurant_MenuList")
+                )
+            )[0]
+            menuList_li_tags = menuList.find_elements(By.TAG_NAME, "li")
 
             my_restaurant["name"] = name
             # print("restaurant name:", name)
@@ -157,38 +163,26 @@ try:
                 "detailedAddress": detailedAddress,
             }
             my_restaurant["rating"] = rating
-
             my_restaurant["menuAndPrice"] = []
-            try:
-                menuList = wait.until(
-                    EC.presence_of_all_elements_located(
-                        (By.CSS_SELECTOR, "ul.list.Restaurant_MenuList")
-                    )
-                )[0]
-                menuList_li_tags = menuList.find_elements(By.TAG_NAME, "li")
 
-                for li in menuList_li_tags:
-                    menu_name = li.find_element(
-                        By.CSS_SELECTOR, "span.Restaurant_Menu"
-                    ).text
-                    price_element = li.find_element(
-                        By.CLASS_NAME, "Restaurant_MenuPrice"
-                    )
-                    print("just before driver execute_script")
-                    driver.execute_script(
-                        "arguments[0].scrollIntoView(true);", price_element
-                    )
+            for li in menuList_li_tags:
+                menu_name = li.find_element(
+                    By.CSS_SELECTOR, "span.Restaurant_Menu"
+                ).text
+                price_element = li.find_element(By.CLASS_NAME, "Restaurant_MenuPrice")
+                print("just before driver execute_script")
+                driver.execute_script(
+                    "arguments[0].scrollIntoView(true);", price_element
+                )
 
-                    # print("just before checking visibility of price element")
-                    # Wait for the price element to be visible
-                    # WebDriverWait(driver, 10).until(EC.visibility_of(price_element))
+                # print("just before checking visibility of price element")
+                # Wait for the price element to be visible
+                # WebDriverWait(driver, 10).until(EC.visibility_of(price_element))
 
-                    price = price_element.text
-                    print("menu:", menu_name, "price:", price)
-                    menu_item = {"menu": menu_name, "price": price}
-                    my_restaurant["menuAndPrice"].append(menu_item)
-            except:
-                print("menu not found")
+                price = price_element.text
+                print("menu:", menu_name, "price:", price)
+                menu_item = {"menu": menu_name, "price": price}
+                my_restaurant["menuAndPrice"].append(menu_item)
 
             my_restaurant["image"] = []
 
@@ -256,10 +250,10 @@ except Exception as e:
         print("error occurred:", type(e).__name__)
 
 print("number of restaurants printed out so far:", num_restaurants)
-driver.close()
-# driver.close()
+driver.close()  # close current tab which is first tab
+print("Closed first tab")
 
 df = pd.DataFrame(data)
 
-with open("fourth_six_sliders.json", "w", encoding="utf-8") as file:
+with open("fifth_six_sliders.json", "w", encoding="utf-8") as file:
     df.to_json(file, orient="split", force_ascii=False, index=False)
