@@ -101,11 +101,14 @@ num_restaurants = 0
 
 try:
     for read_more in read_more_elements[36:42]:
-        print("before execute_script read_more")
-        driver.execute_script("arguments[0].scrollIntoView();", read_more)
-        # Click the element using JavaScript
-        driver.execute_script("arguments[0].click();", read_more)
-        # read_more.click()
+        try:
+            print("before execute_script read_more")
+            driver.execute_script("arguments[0].scrollIntoView();", read_more)
+            driver.execute_script("arguments[0].click();", read_more)
+        except:
+            print("before execute_script read_more again in except")
+            driver.execute_script("arguments[0].scrollIntoView();", read_more)
+            driver.execute_script("arguments[0].click();", read_more)
 
         try:
             driver.switch_to.window(driver.window_handles[-1])
@@ -250,7 +253,6 @@ except Exception as e:
         print("error occurred:", type(e).__name__)
 
 print("number of restaurants printed out so far:", num_restaurants)
-driver.close()
 driver.close()
 
 df = pd.DataFrame(data)

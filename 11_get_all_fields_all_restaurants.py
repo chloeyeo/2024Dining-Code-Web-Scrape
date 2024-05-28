@@ -97,15 +97,21 @@ read_more_elements = wait.until(
     EC.presence_of_all_elements_located((By.CLASS_NAME, "Read__More__Text"))
 )
 
+for element in read_more_elements:
+    wait.until(EC.element_to_be_clickable(element))
+
 num_restaurants = 0
 
 try:
     for read_more in read_more_elements:
-        print("before execute_script read_more")
-        driver.execute_script("arguments[0].scrollIntoView();", read_more)
-        # Click the element using JavaScript
-        driver.execute_script("arguments[0].click();", read_more)
-        # read_more.click()
+        try:
+            print("before execute_script read_more")
+            driver.execute_script("arguments[0].scrollIntoView();", read_more)
+            driver.execute_script("arguments[0].click();", read_more)
+        except:
+            print("before execute_script read_more again in except")
+            driver.execute_script("arguments[0].scrollIntoView();", read_more)
+            driver.execute_script("arguments[0].click();", read_more)
 
         try:
             driver.switch_to.window(driver.window_handles[-1])
