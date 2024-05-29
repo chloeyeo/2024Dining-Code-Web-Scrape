@@ -107,10 +107,13 @@ try:
         try:
             print("before execute_script read_more")
             driver.execute_script("arguments[0].scrollIntoView();", read_more)
+            wait.until(EC.element_to_be_clickable(read_more))
             driver.execute_script("arguments[0].click();", read_more)
         except:
             print("before execute_script read_more again in except")
+            wait.until(EC.presence_of_element_located((By.CLASS_NAME, "Read__More__Text")))
             driver.execute_script("arguments[0].scrollIntoView();", read_more)
+            wait.until(EC.element_to_be_clickable(read_more))
             driver.execute_script("arguments[0].click();", read_more)
 
         try:
@@ -123,6 +126,9 @@ try:
         restaurants = wait.until(
             EC.presence_of_all_elements_located((By.CLASS_NAME, "InfoHeader"))
         )
+
+        for restaurant in restaurants:
+            wait.until(EC.element_to_be_clickable(restaurant))
 
         for restaurant in restaurants:
             num_restaurants += 1
@@ -256,8 +262,8 @@ except Exception as e:
         print("error occurred:", type(e).__name__)
 
 print("number of restaurants printed out so far:", num_restaurants)
-driver.close()  # close current tab which is first tab
-print("Closed first tab")
+# driver.close()  # close current tab which is first tab
+# print("Closed first tab")
 
 df = pd.DataFrame(data)
 
