@@ -151,10 +151,27 @@ try:
             location = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "locat")))
             locationArr = location.text.split("\n")[0].split(" ")
             print("location:", locationArr)
-            metropolitan = locationArr[0]
-            city = locationArr[1]
-            district = locationArr[2]
-            detailedAddress = locationArr[3]
+            if len(locationArr) >= 1:
+                metropolitan = locationArr[0]
+            else:
+                metropolitan = ""
+            print("metropolitan:", metropolitan)
+            
+            if len(locationArr) >= 2:
+                city = locationArr[1]
+            else:
+                city = ""
+            print("city:", city)
+            if len(locationArr) >= 3:
+                district = locationArr[2]
+            else:
+                district = ""
+            print("district", district)
+            if len(locationArr) >= 4:
+                detailedAddress = ' '.join(locationArr[3:])
+            else:
+                detailedAddress = ""
+            print("detailedAddress:", detailedAddress)
             rating = wait.until(
                 EC.element_to_be_clickable((By.ID, "lbl_review_point"))
             ).text
@@ -222,7 +239,6 @@ try:
                 print("Closed the current restaurant tab")
             except NoSuchWindowException as e:
                 print("Error closing current restaurant tab:", e)
-                continue  # Skip to the next iteration of the loop
 
             try:
                 # Switch to the second tab
@@ -230,14 +246,12 @@ try:
                 print("Switched back to second tab")
             except NoSuchWindowException as e:
                 print("Error switching back to second tab:", e)
-                continue  # Skip to the next iteration of the loop
 
         try:
             driver.close()
             print("Closed second tab")
         except NoSuchWindowException as e:
             print("Error closing current second tab:", e)
-            continue  # Skip to the next iteration of the loop
 
         try:
             # Switch to the first tab
@@ -245,7 +259,6 @@ try:
             print("Switched back to first tab")
         except NoSuchWindowException as e:
             print("Error switching back to first tab:", e)
-            continue  # Skip to the next iteration of the loop
 
 except NoSuchElementException as e:
     print("Element not found on the page:", e)
@@ -259,11 +272,11 @@ except Exception as e:
     if str(e):  # checks if exception message isn't empty
         print("error occurred:", e)
     else:  # prints out type of exception
-        print("error occurred:", type(e).__name__)
+        print("error occurred, error type:", type(e).__name__)
 
 print("number of restaurants printed out so far:", num_restaurants)
-# driver.close()  # close current tab which is first tab
-# print("Closed first tab")
+driver.quit()  # close entire browser instance and all its tabs
+print("Closed browser")
 
 df = pd.DataFrame(data)
 

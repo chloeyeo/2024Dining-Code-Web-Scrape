@@ -1,17 +1,5 @@
 most recent error occurred:
 name: 밥드림
-location: ['서울특별시', '성동구', '용답동', '234', '지하1층', '5호', '밥드림']    
-rating: 4.6
-just before driver execute_script
-menu: 로제닭볶음탕 price: 15,000원
-just before driver execute_script
-menu: 고추장불고기덮밥 price: 8,000원
-just before driver execute_script
-menu: 양푼목살김치찌개 price: 10,000원
-just before driver execute_script
-menu: 능이닭볶음탕 price: 13,000원
-img src value: https://d12zq4w4guyljn.cloudfront.net/750_750_20200704023456525_photo_7d5259708a81.jpg
-img src value: https://d12zq4w4guyljn.cloudfront.net/750_750_20200717125330108_menuo_7d5259708a81.jpg_7d5259708a81.jpg                                                                  _7d5259708a81.jpg
 Closed the current restaurant tab
 Switched back to second tab
 Opened and switched to restaurant tab
