@@ -7,6 +7,7 @@ from selenium.webdriver.common.keys import Keys
 import pandas as pd
 import time
 import random
+import json
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
@@ -278,7 +279,23 @@ print("number of restaurants printed out so far:", num_restaurants)
 driver.quit()  # close entire browser instance and all its tabs
 print("Closed browser")
 
+# df = pd.DataFrame(data)
+
+# with open("all_restaurants.json", "w", encoding="utf-8") as file:
+#     df.to_json(file, orient="split", force_ascii=False, index=False)
+
 df = pd.DataFrame(data)
 
-with open("all_restaurants.json", "w", encoding="utf-8") as file:
-    df.to_json(file, orient="split", force_ascii=False, index=False)
+# Convert DataFrame to the desired JSON format
+result = df.to_dict(orient='records')
+
+# Save the JSON to a file
+with open('all_restaurants2.json', 'w', encoding='utf-8') as f:
+    json.dump(result, f, ensure_ascii=False, indent=4)
+
+# Print the JSON string
+json_str = json.dumps(result, ensure_ascii=False, indent=4)
+
+# Write JSON string to a .txt file
+with open('all_restaurants2.txt', 'w', encoding='utf-8') as f:
+    f.write(json_str)
