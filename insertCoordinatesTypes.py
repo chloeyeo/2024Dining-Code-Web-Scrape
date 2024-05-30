@@ -49,10 +49,13 @@ for restaurant in restaurants:
     
     # Get coordinates from address
     coordinates = get_coordinates(address)
+    print("coordinates:", coordinates)
     restaurant['location']["coordinates"] = coordinates
     
     # Select random foodType and mateType
     food_type, mate_type = select_types()
+    print("food_type:", food_type)
+    print("mate_type:", mate_type)
     restaurant['category'] = [{"foodType": food_type}, {"mateType": mate_type}]
 
 
